@@ -2,7 +2,8 @@
 name: career-ops
 description: 中国大陆 AI 求职指挥中心 — 评估岗位、生成定制简历、扫描门户、追踪申请
 user_invocable: true
-args: mode
+argument-hint: "[JD截图/文本/URL] | scan | inbox | tracker | offer | offers | pdf | contact | deep | apply | pipeline | batch | training | project | story-sync"
+arguments: mode
 ---
 
 # career-ops — Router（中国大陆版）
@@ -48,50 +49,23 @@ args: mode
 
 ## Discovery Mode（无参数时）
 
-显示这个菜单：
+输出下面这段紧凑 cheatsheet（不要展开成长版菜单；输入框上方已有 argument-hint，正文不需重复列子命令的全部说明）：
 
 ```
 career-ops — 中国大陆求职指挥中心
 
-🎯 主路径（90% 时间用这个）：
-  截图 JD → 拖到对话框 → /career-ops（自动 auto-pipeline）
-    或
-  复制 JD 全文 → 粘贴 → /career-ops（自动 auto-pipeline）
-    
-  ✅ 5 秒/岗位，零反爬风险，覆盖 Boss/Mokahr/飞书/微信/脉脉 全平台
-  ✅ Claude 直接读图，自动评估 + report + PDF + tracker 一条龙
+🎯 主路径：JD 截图 / 粘贴文本 / 公司+岗位 URL → 直接发给我 → 自动评估 + report + PDF + tracker
 
-⚠️ 国内 URL 默认抓不到 JD（Boss/拉勾/猎聘/Mokahr/飞书都是反爬+登录墙）
-  贴 URL 给我也行，但我会很快让你截图。**截图永远更快**。
+⚡ 子命令（/career-ops <name>）：
+  线索 & 批处理   scan       inbox      pipeline    batch
+  单岗位          offer      offers     pdf         contact     deep        apply
+  追踪 & 沉淀     tracker    story-sync
+  ROI 评估        training   project
 
-⚡ 高效路径（用浏览器 bookmarklet）：
-  打开 JD 页（Boss/猎聘/Mokahr/大厂 careers 都行）→ 点 bookmarklet
-  → JSON 自动落到 inbox/ → 跑 /career-ops inbox 批量处理
-  
-  首次安装：tools/README.md（启动本地服务 + 拖按钮到书签栏）
+⚠️ 国内 URL（Boss/拉勾/猎聘/Mokahr/飞书）90% 抓不到 JD → 截图最快
+🔖 bookmarklet：tools/README.md（一次安装，之后任意 JD 页一键 → inbox）
 
-辅助命令：
-  /career-ops scan     → 线索发现（仅 URL+标题，不取 JD），之后用截图取 JD
-  /career-ops inbox    → 处理 bookmarklet 抓的 JD 文件，自动评估全部
-  /career-ops offer    → 单岗位 A-F 完整评估（不自动生成 PDF）
-  /career-ops offers   → 多 offer 对比 + 加权评分
-  /career-ops pdf      → 单独生成 ATS 优化的定制简历 PDF
-  /career-ops pipeline → 批处理 pipeline.md 里的待办 URL
-  /career-ops batch    → 批量并行评估多个岗位
-  /career-ops tracker  → 查看申请状态汇总
-
-  /career-ops contact  → 主动触达：脉脉/微信/LinkedIn 消息草稿
-  /career-ops deep     → 生成公司深度调研 prompt（中文数据源）
-  /career-ops apply    → 实时申请表助手（读屏幕 + 生成回答）
-
-  /career-ops training → 评估课程/证书是否值得学
-  /career-ops project  → 评估 portfolio 项目的 ROI
-  /career-ops story-sync → 扫 reports/* 抽 Block F 累积到 story-bank.md
-
-🔁 推荐工作流：
-  1. /career-ops scan       → 发现一批感兴趣的公司/岗位（URL + 标题）
-  2. 对每个感兴趣的：截图 JD → 拖给我 → 自动评估
-  3. 拿到 offer → 改 tracker 状态（直接告诉我即可）
+不确定哪个？直接发 JD 给我（auto-pipeline 默认），或问"<name> 怎么用"。
 ```
 
 ---
