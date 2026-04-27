@@ -34,7 +34,7 @@ portals.yml
 # === Personal CV and proof points (privacy) ===
 cv.md
 article-digest.md
-interview-prep/story-bank.md
+# (interview-prep/story-bank.md is gitignored under the interview-prep section below)
 
 # === Generated / build artifacts ===
 .resolved-prompt-*
