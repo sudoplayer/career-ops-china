@@ -20,6 +20,28 @@
 
 ---
 
+## ⚠️ 通用性说明 — 不只是给数据/AI 求职者
+
+虽然这个 fork 的**预置**配置（archetype、portals 公司清单、薪酬调研词条、deal_breakers 模板）是围绕**数据工程师 + AI 工程师 + 大模型应用工程师**做的，但**整个系统的工作流是通用的**：A-F 评估、CV 匹配、薪酬调研、tracker 入库、PDF 生成、bookmarklet inbox 都和你的目标岗位无关。
+
+**换方向只需告诉 Claude 改几个文件**（不要手动改，让 Claude 改最快）：
+
+| 你想做什么方向 | 让 Claude 改 |
+|----------------|--------------|
+| 后端 / 全栈 / SRE / 运维 | `modes/_shared.md` 的 archetype 表 + `portals.yml` 的 title_filter + tracked_companies |
+| 前端 / 客户端 / 移动端 | 同上 + 把"前端/iOS/Android"从 negative 移到 positive |
+| 产品经理 / 运营 / 增长 | archetype 替换为 PM/运营 + 评估维度 weights 调整（技术栈 → 业务能力） |
+| 算法研究 / 学术岗 | archetype 改为 Research Scientist + 加 ICLR/NeurIPS 等会议关键词 |
+| 销售 / 市场 / HR / 法务 | 重写 archetype + 评分维度从"技术栈"换成"行业经验/客户网络/语言能力" |
+| 海外岗（任何方向）| 改用上游 [`santifer/career-ops`](https://github.com/santifer/career-ops)（薪酬源用 Glassdoor/Levels.fyi 而非看准网） |
+| 其他冷门方向（医疗 / 法律 / 教育 / 制造业）| 直接和 Claude 描述你的方向，它会重写 archetypes + 数据源 + framing |
+
+**操作只需一句话**：跟 Claude 说"我是 [方向] 的，请把整个系统调整到这个方向"，它会改 `_shared.md` / `profile.yml` / `portals.yml` / `cv-template.html` 等所有相关文件。
+
+> 设计哲学：**文件即配置，Claude 即编辑器**。系统不是给"数据/AI 求职者"专用的 — 是给"任何想用 AI 助手做精准求职的人"用的。预置只是起点，不是边界。
+
+---
+
 ## 这个项目是什么
 
 **career-ops-china 把 Claude Code 变成一个中国大陆求职指挥中心**：贴一个岗位 JD 进来，AI 会自动跑完整 6 块评估（A-F），生成针对该岗位的 ATS 优化简历 PDF，把申请入库追踪。再加上薪资调研、面试故事库、谈判话术、批量扫描、申请表助手、脉脉/微信 触达消息生成等十几个独立 mode。

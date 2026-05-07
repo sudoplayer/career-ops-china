@@ -24,23 +24,52 @@
 
 ---
 
-## 北极星 — 目标岗位（中国大陆 · 数据/AI/平台方向）
+## 北极星 — 目标岗位（中国大陆 · 2026-05-07 v3 战略）
 
-技能对所有目标岗位用同等严谨度评估。**没有主次之分** — 任何一个岗位只要 comp 与发展空间合适都算成功。
+**v3 战略核心**：从"理论上有岗位"切换到"真实可达池"。所有评估必须先做 **Tier 检测**，Tier D 一律 SKIP，不浪费 token。
+
+详细可达池清单见 `config/target_pool.md`，候选人 deal_breakers 见 `config/profile.yml`。
+
+### 核心 Archetypes（聚焦 3 个）
 
 | Archetype | 主题轴 | 公司在为这个角色买什么 |
 |-----------|--------|---------------------|
-| **数据工程师 / Data Engineer** | ETL/ELT、数据管道、数据建模、Spark/Flink、调度（DolphinScheduler/Airflow） | 能把分散数据稳定可靠地汇总进数仓的人 |
-| **数据仓库 / 数据平台 / DWH** | 数据分层（ODS/DWD/DWS/ADS）、维度建模、数据湖仓一体（Iceberg/Hudi/Paimon）、Doris/StarRocks/ClickHouse | 能从 0 到 1 或迭代企业级数仓的架构者 |
-| **数据治理 / Data Governance** | 元数据、血缘、数据质量、主数据、安全合规、数据资产、数据中台 | 能让数据"用得起、管得住、信得过"的人 |
-| **大模型应用工程师 / LLM Engineer** | RAG、Agent、Prompt 工程、Function Calling、向量检索、Eval、Observability | 能把大模型落地到业务并保证质量的人 |
-| **AI Infra / 大模型基础设施** | 训推一体、显存优化、vLLM/SGLang、分布式训练、模型服务化、GPU 调度 | 能让大模型跑得快、稳、便宜的人 |
-| **后端工程师（数据/AI 方向）** | Java/Go/Python、微服务、中间件、高并发、分布式存储、消息队列 | 业务后端能力扎实、能配合数据/AI 团队的工程师 |
-| **平台工程师 / 架构师** | 内部平台、DevOps/MLOps、可观测、CI/CD、稳定性、SRE | 能把工程组织的"地基"做好的人 |
-| **大数据算法 / 数据科学（业务侧）** | 用户画像、推荐、风控、AB 实验、特征工程、因果推断 | 能用数据驱动业务决策并落地模型的人 |
+| **数据工程师 / Data Engineer**（primary）| NL2SQL、ChatBI、AI+数据 端到端落地、Pipeline、数据建模 | 能把数据 + LLM 落到业务的人（不是纯写 Spark/Flink 任务） |
+| **大模型应用工程师 / LLM App**（primary）| RAG、Agent、Prompt 工程、Function Calling、Eval、Observability | 能把大模型落地到业务、保证质量、控制成本的人 |
+| **数据治理 / Data Governance**（secondary，转 LLM 的 bridge）| 元数据、血缘、数据资产 + LLM 落地（银行金科常打包招）| 能让数据"用得起 + 管得住"，并在数据基础上做 AI 落地的人 |
 
-<!-- [CUSTOMIZE] 上面这 8 个 archetype 是为「数据工程 + 大模型 + 后端 + 平台」的求职者优化的。
-     如果你的主攻方向变了，直接告诉 Claude 改这一段即可。 -->
+### 已弃用 archetypes（2026-05-07）
+
+以下方向**不再评估**（PDF v3 不在真实可达池 + 候选人主动放弃）：
+- 数据仓库 / 数据平台 / DWH（纯数仓）
+- 大数据算法 / 数据科学
+- 后端工程师（即使带"数据/AI"修饰）
+- AI Infra / 大模型基础设施（候选人画像打不进）
+- 平台工程师 / 架构师
+
+> 评估时若 JD 命中以上方向且**没有强 LLM 应用元素**，直接走 Tier D → SKIP。
+
+### Tier 检测（评估前置规则，必须先于 Block A）
+
+每个 JD 进 Block A 之前先做这一步：
+
+1. **真实门槛硬筛**：JD 里命中以下任一信号 → **立刻 SKIP**，不进 A-F：
+   - "顶会论文" / "代表性开源工作" / "ACM/Kaggle 顶级"
+   - "顶尖博士" / "5% 顶尖人才"
+   - "预训练 / RLHF / 多模态推理优化 / 推理优化" 这种研究方向 title
+   - "月薪 50-80K + 16 薪" + 研究路线
+   - 派遣 / 外包 / 业务外包关键词
+
+2. **Tier 归类**（写入 report 头）：
+   - **Tier A**（60-80% 命中，**优先投**）：银行金科 LLM 部门、系统集成商 AI 落地、大型制造业 AI、ERP 厂商 AI 应用
+   - **Tier B**（30-50% 命中，**能争取**）：字节火山引擎/Coze、阿里通义应用层/钉钉/夸克、腾讯 WeChat AI/CSIG
+   - **Tier C**（15-30% 命中，**8 月底前不投**）：二线 AI Agent 创业、出海 AI
+   - **Tier D**（不投）：见 profile.yml 的 deal_breakers
+   - **未明确**：需查 `config/target_pool.md` 或 WebSearch 该公司画像
+
+3. **画像反推规则**：评估"这家公司会不会真的给候选人面试机会"，不是"JD 写的能力候选人有没有"。
+   - 候选人画像：海外 CS 硕士 + 1.4 年华为 OD（数据治理 + NL2SQL）+ 1 年 gap（Elytra 个人项目）+ Kaggle 银 → **中级 AI 应用工程师 / 数据工程师，25-40K × 14-16**
+   - JD 实际门槛 vs 画像差距 ≥ 1 档 → 降级或 SKIP
 
 ### 按 Archetype 自适应包装
 
@@ -48,16 +77,11 @@
 
 | 如果岗位是… | 强调候选人身上的… | proof points 来源 |
 |------------|------------------|------------------|
-| 数据工程师 | 大规模数据吞吐、稳定性、SLA、链路重构经验、降本 | article-digest.md + cv.md |
-| 数据仓库/平台 | 分层规范从 0 到 1、模型迭代、查询提速、存储成本下降 | article-digest.md + cv.md |
-| 数据治理 | 元数据/血缘/质量平台从 0 到 1、跨部门推动、合规落地 | article-digest.md + cv.md |
-| 大模型应用工程师 | 端到端 RAG/Agent 落地、Eval 体系、效果提升、用户量 | cv.md + article-digest.md |
-| AI Infra | 训推性能、GPU 利用率、推理成本/延迟、稳定性 | article-digest.md + cv.md |
-| 后端工程师 | QPS、可用性、p99 延迟、复杂业务建模、重构经验 | cv.md + article-digest.md |
-| 平台工程师/架构师 | 提效数据、内部用户数、稳定性 SLO、平台演进 | cv.md + article-digest.md |
-| 大数据算法 | 业务指标提升、AB 实验设计、模型上线后效果 | cv.md + article-digest.md |
+| 数据工程师 | NL2SQL/ChatBI 端到端、数据治理 + LLM、Elytra Agent SQL、华为 92% 准确率 | article-digest.md + cv.md |
+| 数据治理（带 LLM）| 元数据/血缘 + NL2SQL 闭环、跨部门推动、数据资产 → LLM 落地 | article-digest.md + cv.md |
+| 大模型应用工程师 | 端到端 RAG/Agent、Eval（173/173 tests + 14 case 量化）、Observability、多模型路由、SELECT-only 安全 | cv.md + article-digest.md |
 
-<!-- [CUSTOMIZE] 把你具体的项目映射到上面每个 archetype -->
+<!-- [CUSTOMIZE] 把你具体的项目映射到上面 3 个 archetype。已弃用的方向（数仓/大数据/后端/AI Infra/平台）不在此表。 -->
 
 ### 个人叙事 / Exit Narrative（在所有 framing 中复用）
 
