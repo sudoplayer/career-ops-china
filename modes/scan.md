@@ -167,7 +167,9 @@ WebSearch query：
 
 ### Phase 3 — 过滤 + 写入
 
-6. **过滤** 用 `portals.yml` 的 `title_filter`：positive 命中 + negative 排除
+6. **过滤**（顺序固定，先 blacklist 后 title）：
+   - **6a. dead_orgs_blacklist 硬过滤**（先做，不可绕过）：读 `portals.yml` 的 `dead_orgs_blacklist`。每个 candidate URL 或 company 命中任一 entry 的 `url_substrings` / `company_keywords` → 立刻丢弃，**不进入 pipeline.md**；写 scan-history.tsv 状态 `skipped_dead_org_blacklist`，备注 entry.reason。**spawn subagent 跑 scan 时，必须把整个 dead_orgs_blacklist 段以 YAML 文本形式塞进 prompt** — subagent 看不到 user-level memory，靠它自己 grep 不到这个红名单。
+   - **6b. title_filter**（在 6a 之后）：positive 命中 + negative 排除
 
 7. **去重**（三重）：scan-history.tsv + applications.md + pipeline.md
 
