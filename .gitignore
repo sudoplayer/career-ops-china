@@ -68,6 +68,7 @@ pids/
 # === Claude Code local ===
 .claude/settings.local.json
 .claude/memory/
+.claude
 
 # === .playwright-mcp ===
 .playwright-mcp
