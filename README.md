@@ -28,7 +28,7 @@
 
 | 你想做什么方向 | 让 Claude 改 |
 |----------------|--------------|
-| 后端 / 全栈 / SRE / 运维 | `modes/_shared.md` 的 archetype 表 + `portals.yml` 的 title_filter + tracked_companies |
+| 后端 / 全栈 / SRE / 运维 | `modes/_profile.md` 的 archetype 表 + `portals.yml` 的 title_filter + tracked_companies |
 | 前端 / 客户端 / 移动端 | 同上 + 把"前端/iOS/Android"从 negative 移到 positive |
 | 产品经理 / 运营 / 增长 | archetype 替换为 PM/运营 + 评估维度 weights 调整（技术栈 → 业务能力） |
 | 算法研究 / 学术岗 | archetype 改为 Research Scientist + 加 ICLR/NeurIPS 等会议关键词 |
@@ -36,7 +36,7 @@
 | 海外岗（任何方向）| 改用上游 [`santifer/career-ops`](https://github.com/santifer/career-ops)（薪酬源用 Glassdoor/Levels.fyi 而非看准网） |
 | 其他冷门方向（医疗 / 法律 / 教育 / 制造业）| 直接和 Claude 描述你的方向，它会重写 archetypes + 数据源 + framing |
 
-**操作只需一句话**：跟 Claude 说"我是 [方向] 的，请把整个系统调整到这个方向"，它会改 `_shared.md` / `profile.yml` / `portals.yml` / `cv-template.html` 等所有相关文件。
+**操作只需一句话**：跟 Claude 说"我是 [方向] 的，请把整个系统调整到这个方向"，它会改 `_profile.md`（archetype + 叙事）/ `profile.yml` / `portals.yml` / `cv-template.html` 等所有相关文件。
 
 > 设计哲学：**文件即配置，Claude 即编辑器**。系统不是给"数据/AI 求职者"专用的 — 是给"任何想用 AI 助手做精准求职的人"用的。预置只是起点，不是边界。
 
@@ -119,10 +119,10 @@ flowchart TD
 
 每个 JD 进来都会跑 6 个 block：
 
-| Block | 内容 | 在 _shared.md 里调整什么 |
-|------|------|----------------------|
-| **A 角色摘要** | Archetype、Domain、Function、Seniority、业务方向、Base 城市、TL;DR | archetype 列表 |
-| **B CV 匹配** | JD 每条要求 → 候选人 cv.md 对应行；列出 gaps + 缓解策略 | 按 archetype 调整 proof point 优先级 |
+| Block | 内容 | 配置位置 |
+|------|------|---------|
+| **A 角色摘要** | Archetype、Domain、Function、Seniority、业务方向、Base 城市、TL;DR | `_profile.md`（archetype 列表）|
+| **B CV 匹配** | JD 每条要求 → 候选人 cv.md 对应行；列出 gaps + 缓解策略 | `_profile.md`（自适应包装表）|
 | **C 级别策略** | JD 暗示级别 vs 候选人自然级别；「不撒谎卖资深」/「被压级」两套话术 | 大厂职级对标表 |
 | **D 薪酬与需求** | **看准网/脉脉/OfferShow/知乎** 调研薪资段、口碑、工时、业务前景 | 数据源列表 |
 | **E 个性化方案** | Top 5 CV 修改 + Top 5 LinkedIn/脉脉资料修改 | — |
@@ -193,7 +193,7 @@ deal_breakers:
 
 | # | 区别 | 文件 |
 |---|------|------|
-| 1 | 8 个 archetype 替换为中国数据/AI 岗位类型 | `modes/_shared.md` |
+| 1 | 8 个 archetype 替换为中国数据/AI 岗位类型 | `modes/_profile.template.md` |
 | 2 | A-F 评估流程全中文重写，加入国内 HR 红线问题 | `modes/offer.md` |
 | 3 | Block D 薪酬源换为看准网/脉脉/OfferShow/知乎/一亩三分地 | `modes/offer.md` |
 | 4 | 7 维公司调研改用脉脉职言/天眼查/IT 桔子/36 氪/小红书 | `modes/deep.md` |
@@ -485,13 +485,13 @@ tracked_companies:
 
 | 你说的话 | Claude 会改 |
 |---------|-----------|
-| "把 archetype 加一个 SRE 方向" | `modes/_shared.md` |
+| "把 archetype 加一个 SRE 方向" | `modes/_profile.md` |
 | "我现在不在意工时了，把权重调小" | `modes/offers.md` |
 | "加这 5 家公司到 portals" | `portals.yml` |
 | "更新我的简历，加一段 X 项目" | `cv.md` |
 | "把 PDF 模板的颜色改成蓝色" | `templates/cv-template.html` |
 | "我对 996 容忍度变高了" | `modes/offers.md` |
-| "我现在主攻方向变成后端" | `modes/_shared.md` |
+| "我现在主攻方向变成后端" | `modes/_profile.md` |
 | "把 deal-breaker 的『大小周』移除" | `config/profile.yml` |
 
 每次评估完一个岗位，如果 Claude 评分和你的直觉差太多，告诉它："这个分太高/低了，因为 X"，它会更新你的 profile / 调整 framing，下次会更准。**系统是越用越聪明的**。
@@ -630,10 +630,14 @@ career-ops-china/
 │
 ├── config/
 │   ├── profile.example.yml         # ✅ 模板
+│   ├── target_pool.template.md     # ✅ Tier A/B/C/D 模板
 │   └── profile.yml                 # ⛔ gitignored — 你的个人配置
+│   └── target_pool.md              # ⛔ gitignored — 你的 Tier 公司池
 │
 ├── modes/                          # 16 个 mode 文件，全部中文
-│   ├── _shared.md                  # 共享上下文：archetype + 规则
+│   ├── _shared.md                  # 系统规则、评分、薪酬源、职级对标
+│   ├── _profile.template.md        # ✅ 用户 archetype 模板
+│   ├── _profile.md                 # ⛔ gitignored — 你的 archetype、叙事、谈判
 │   ├── auto-pipeline.md            # 完整 pipeline（默认）
 │   ├── offer.md                    # 单岗位 A-F 评估
 │   ├── offers.md                   # 多 offer 对比

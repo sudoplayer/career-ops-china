@@ -29,7 +29,9 @@ inbox/*
 
 # === User config (copy from templates/*.example.yml) ===
 config/profile.yml
+config/target_pool.md
 portals.yml
+modes/_profile.md
 
 # === Personal CV and proof points (privacy) ===
 cv.md
