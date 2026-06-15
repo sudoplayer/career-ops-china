@@ -2,22 +2,28 @@
 
 候选人贴一个职位（文本或 URL）时，**必须按顺序输出 A-F 六个 block**。
 
-## Step 0 — Archetype 检测
+## Step 0 — Archetype 检测 + Tier 归类（评估前置，必须先于 Block A）
 
-把这个岗位归类到 `_shared.md` 中定义的 8 个 archetype 之一：
-- 数据工程师 / Data Engineer
-- 数据仓库 / 数据平台 / DWH
-- 数据治理 / Data Governance
-- 大模型应用工程师 / LLM Engineer
-- AI Infra / 大模型基础设施
-- 后端工程师（数据/AI 方向）
-- 平台工程师 / 架构师
-- 大数据算法 / 数据科学
+### 0.1 读 Archetype
 
-如果是混合型，标出最接近的 2 个。Archetype 决定：
-- Block B 优先突出哪些 proof points
+读 `modes/_profile.md` 的核心 Archetypes 表，把岗位归类到候选人的核心 archetype 之一（混合型标最近的 2 个）。
+
+Archetype 决定：
+- Block B 优先突出哪些 proof points（见 `_profile.md` 的自适应包装表）
 - Block E 怎么改写 summary
 - Block F 准备哪种 STAR 故事
+
+### 0.2 Tier 硬筛
+
+`_profile.md` 中标记为"已弃用"的 archetype，JD 命中且与核心 archetype 无强重叠 → 直接 SKIP。
+
+对未跳过的岗位，按 `modes/_shared.md` 的 Tier 检测规则执行（对照 `config/target_pool.md`）：
+
+1. **真实门槛硬筛**：JD 命中 `target_pool.md` 中 Tier D 触发关键词 → **立刻 SKIP**，不浪费 token
+2. **Tier 归类**（写入 report 头）：对照 `target_pool.md` 的 Tier A/B/C/D 清单 + 画像反推
+3. Tier A/B → 正常进 Block A-F
+4. Tier C → 进 A-F 但标注"延后投递"
+5. Tier D → SKIP，写一句理由
 
 ## Block A — 角色摘要
 

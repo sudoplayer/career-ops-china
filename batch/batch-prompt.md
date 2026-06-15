@@ -15,7 +15,9 @@
 | `cv.md` | 总是 | 候选人简历（read-only） |
 | `article-digest.md`（如存在） | 总是 | 详细 proof points（优先级高于 cv.md） |
 | `config/profile.yml` | 总是 | 候选人姓名、目标、薪资区间、叙事 |
-| `modes/_shared.md` | 总是 | **8 大 archetype 定义、framing 规则、中国大陆薪酬源、北极星对齐、评分权重** |
+| `modes/_profile.md` | 总是 | **候选人 archetype、叙事、谈判脚本、自适应包装表** |
+| `config/target_pool.md` | 总是 | **Tier A/B/C/D 公司池、候选人画像、Tier D 触发关键词** |
+| `modes/_shared.md` | 总是 | **framing 规则、中国大陆薪酬源、评分权重、职级对标表、Tier 检测流程** |
 | `CLAUDE.md` | 如遇 TSV / tracker 格式疑问 | TSV 9 列规范和 canonical 状态 |
 | `templates/cv-template.html` | 生成 PDF 时 | HTML 模板 |
 | `tools/generate-pdf.mjs` | 生成 PDF 时 | Puppeteer 脚本 |
@@ -24,7 +26,7 @@
 - 永远不要写 cv.md
 - 永远不要硬编码指标 — 评估时从 cv.md + article-digest.md 实时读
 - cv.md 与 article-digest.md 冲突 → 以 article-digest.md 为准
-- archetype / framing / 薪酬源的细节**不在本文件** — 看 `_shared.md`，不要凭记忆凑
+- archetype 看 `_profile.md`，系统规则 / framing / 薪酬源看 `_shared.md`，Tier 检测看 `target_pool.md`。细节**不在本文件**，不要凭记忆凑
 
 ---
 
@@ -50,7 +52,7 @@
 
 ### Step 2 — A-F 评估
 
-按 `_shared.md` 里的 archetype 表归类岗位（混合型标最近的 2 个），再按 `_shared.md` 的 framing 规则写以下 block。**内容规范看 `_shared.md`，本文件只给结构：**
+按 `_profile.md` 里的 archetype 表归类岗位（混合型标最近的 2 个），再按 `_shared.md` 的 framing 规则写以下 block。**内容规范看 `_shared.md`，本文件只给结构：**
 
 - **Block A — 角色摘要**：Archetype / Domain / Function / Seniority（含大厂职级对标）/ 业务方向 / Remote / Base 城市 / 团队规模 / 公司类型 / TL;DR
 - **Block B — CV 匹配**：JD 每条要求 → CV 具体行（按 archetype 调优先级）。附 gaps 段：每个 gap 标 hard blocker / nice-to-have、相邻经验论证、portfolio 填补、缓解动作

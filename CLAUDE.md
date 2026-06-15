@@ -34,7 +34,9 @@ AI-powered job search automation built on Claude Code: pipeline tracking, offer 
 
 1. `cv.md` 是否存在？
 2. `config/profile.yml` 是否存在（不只是 profile.example.yml）？
-3. `portals.yml` 是否存在？（中国大陆版默认已存在，不需要重新创建）
+3. `modes/_profile.md` 是否存在？如果 `modes/_profile.template.md` 存在而 `_profile.md` 不存在，复制 template → `_profile.md`
+4. `config/target_pool.md` 是否存在？如果 `config/target_pool.template.md` 存在而 `target_pool.md` 不存在，复制 template → `target_pool.md`
+5. `portals.yml` 是否存在？（中国大陆版默认已存在，不需要重新创建）
 
 **如果 cv.md 或 profile.yml 缺失，进入 onboarding 模式。** 在基础文件齐全之前，**不要** 跑评估、扫描或任何其他 mode。一步步引导用户：
 
@@ -60,7 +62,7 @@ AI-powered job search automation built on Claude Code: pipeline tracking, offer 
 >
 > 我帮你填好。"
 
-把答案写进 `config/profile.yml`。把目标岗位映射到最接近的 archetype（在 `modes/_shared.md` 中），如果不匹配就改 `_shared.md`。
+把答案写进 `config/profile.yml`。把目标岗位映射到最接近的 archetype（在 `modes/_profile.md` 中），如果不匹配就改 `_profile.md`。
 
 #### Step 3: Portals（可选 — 中国大陆版默认已配好）
 中国大陆版的 `portals.yml` 已经预配置好了 50+ 公司：
@@ -94,9 +96,9 @@ AI-powered job search automation built on Claude Code: pipeline tracking, offer 
 >
 > 给我越多上下文，我就能过滤得越准。把我当成一个新来的猎头 — 第一周需要了解你，之后就会变得很有价值。"
 
-把候选人分享的信息存到 `config/profile.yml`（narrative 段）或 `article-digest.md`（如果是 proof points）。如果他们描述的方向和默认 archetype 不一致，更新 `modes/_shared.md`。
+把候选人分享的信息存到 `config/profile.yml`（narrative 段）、`modes/_profile.md`（archetype/framing）或 `article-digest.md`（如果是 proof points）。如果他们描述的方向和默认 archetype 不一致，更新 `modes/_profile.md`。
 
-**每次评估后都要学习。** 如果用户说"这个分太高了，我不会投" 或 "你漏掉了我有 X 的经验"，更新你的理解。调整 `_shared.md` 的 framing 或在 `profile.yml` 加备注。**系统应该每次互动都变得更聪明。**
+**每次评估后都要学习。** 如果用户说"这个分太高了，我不会投" 或 "你漏掉了我有 X 的经验"，更新你的理解。调整 `_profile.md` 的 framing 或在 `profile.yml` 加备注。**系统应该每次互动都变得更聪明。**
 
 #### Step 6: 准备就绪
 所有文件都齐了之后，告诉用户：
@@ -133,14 +135,14 @@ AI-powered job search automation built on Claude Code: pipeline tracking, offer 
 This system is designed to be customized by YOU (Claude). 用户让你改 archetype、调评分、加公司、改谈判话术 — 直接改。你能读到同样的文件，所以你知道要改哪里。
 
 **常见定制请求：**
-- "改 archetype 到 [后端/前端/算法/SRE]" → 改 `modes/_shared.md`
+- "改 archetype 到 [后端/前端/算法/SRE]" → 改 `modes/_profile.md`
 - "把 modes 翻成英文" → 改 `modes/` 下所有文件
 - "把这些公司加到 portals" → 改 `portals.yml`
 - "更新我的 profile" → 改 `config/profile.yml`
 - "改 CV 模板设计" → 改 `templates/cv-template.html`
-- "调评分权重" → 改 `modes/_shared.md` 和 `batch/batch-prompt.md`
+- "调评分权重" → 用户特定权重改 `modes/_profile.md`，系统默认权重改 `modes/_shared.md` 和 `batch/batch-prompt.md`
 - "我对 996 容忍度变高了" → 改 `modes/offers.md` 的工时权重
-- "我现在主攻方向变成 X" → 改 `modes/_shared.md` 的 archetype 列表
+- "我现在主攻方向变成 X" → 改 `modes/_profile.md` 的 archetype 列表
 
 ### Skill Modes
 
